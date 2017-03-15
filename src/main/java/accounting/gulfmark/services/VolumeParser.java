@@ -1,8 +1,6 @@
 package accounting.gulfmark.services;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,18 +35,12 @@ public class VolumeParser {
 					String[] items = lines[i].trim().split(" +");
 					volEntry.setMonth(items[2]);
 					volEntry.setYear(items[3]);
-					double net;
 					if (items.length == 6) {
-						if (items[5].endsWith("-")) {
-							net = Double.parseDouble(items[5].substring(0, items[5].indexOf('-'))) * (-1);
-						} else {
-							net = Double.parseDouble(items[5]);
-						}
-						volEntry.setNet(net);
+						volEntry.setNet(strToDouble(items[5]));
 					} else if (items.length == 8){
-						volEntry.setUnit(Double.parseDouble(items[4]));
-						volEntry.setVolume(Double.parseDouble(items[5]));
-						volEntry.setNet(Double.parseDouble(items[6]));
+						volEntry.setUnit(strToDouble(items[4]));
+						volEntry.setVolume(strToDouble(items[5]));
+						volEntry.setNet(strToDouble(items[6]));
 					}
 				}
 				entries.add(volEntry);	
@@ -57,6 +49,12 @@ public class VolumeParser {
 		return entries;
 	}
 	
+	public static double strToDouble(String string) {
+		if (string.endsWith("-")) {
+			return Double.parseDouble(string.substring(0, string.indexOf('-'))) * (-1); 
+		}
+		return Double.parseDouble(string);
+	}
 
 	
 	public static void createXls(List<VolEntry> entries, String xlsPath) throws Exception {

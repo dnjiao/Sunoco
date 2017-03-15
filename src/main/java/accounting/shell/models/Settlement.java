@@ -14,12 +14,49 @@ public class Settlement {
 	private String leaseName;
 	private String product;
 	private String pipeline;
+	private String qbIndex;
 	private String agreement;
+	
 
 	private int contractNo;
 	private int commitment;
 	private int dealTrackNo;
+	private int eventNo;
+	private int eventTracking;
+	private int origEvent;
 	
+	public String getQbIndex() {
+		return qbIndex;
+	}
+
+	public void setQbIndex(String qbIndex) {
+		this.qbIndex = qbIndex;
+	}
+
+	public int getEventNo() {
+		return eventNo;
+	}
+
+	public void setEventNo(int eventNo) {
+		this.eventNo = eventNo;
+	}
+
+	public int getEventTracking() {
+		return eventTracking;
+	}
+
+	public void setEventTracking(int eventTracking) {
+		this.eventTracking = eventTracking;
+	}
+
+	public int getOrigEvent() {
+		return origEvent;
+	}
+
+	public void setOrigEvent(int origEvent) {
+		this.origEvent = origEvent;
+	}
+
 	private double volume;
 	private double price;
 	private double settleAmount;

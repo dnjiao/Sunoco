@@ -128,10 +128,26 @@ public class SettlementXls {
 			if (cell != null) {
 				settlement.setPipeline(cell.getStringCellValue());
 			}
+			cell = row.getCell(colNameMap.get("qb"));
+			if (cell != null) {
+				settlement.setQbIndex(cell.getStringCellValue());
+			}
 			cell = row.getCell(colNameMap.get("agreement"));
 			if (cell != null) {
 				settlement.setAgreement(cell.getStringCellValue());
 			}
+			cell = row.getCell(colNameMap.get("eventNo"));
+			if (cell != null) {
+				settlement.setEventNo((int)cell.getNumericCellValue());
+			}
+			cell = row.getCell(colNameMap.get("eventTracking"));
+			if (cell != null) {
+				settlement.setEventTracking((int)cell.getNumericCellValue());
+			}
+			cell = row.getCell(colNameMap.get("origEvent"));
+			if (cell != null) {
+				settlement.setOrigEvent((int)cell.getNumericCellValue());
+			}	
 			
 			// Determine category based on buy/sell flag and lease name
 			
@@ -218,9 +234,10 @@ public class SettlementXls {
 			Cell cell = null;
 			String[] cols = {"ProductionPeriod", "STA Netting Buy/Sell Flag", "Volume Status",
 					"Event Date", "Contract#", "Smart#", "Commitment#", "DealTracking #", 
-					"BAVVolume", "BAVVolume Unit", "DeliveryCurrency", "Cash FlowType", 
+					"BAVVolume", "BAVVolume Unit", "Price", "DeliveryCurrency", "Cash FlowType", 
 					"CurrentSettle Amount", "Location",	"Lease#", "Lease Name", 
-					"Product", "Pipeline Name", "Master Netting Agreement"};
+					"Product", "Pipeline Name", "QB Index Name", "Master Netting Agreement",
+					"Event #", "Event Tracking Num", "Orig Event Num"};
 			for (int j = 0; j < cols.length; j++) {
 				cell = row.createCell(j);
 				cell.setCellValue(cols[j]);
@@ -253,24 +270,35 @@ public class SettlementXls {
 				cell = row.createCell(9);
 				cell.setCellValue(sett.getUnit());
 				cell = row.createCell(10);
-				cell.setCellValue(sett.getCurrency());
+				cell.setCellValue(sett.getPrice());
 				cell = row.createCell(11);
-				cell.setCellValue(sett.getCashFlowType());
+				cell.setCellValue(sett.getCurrency());
 				cell = row.createCell(12);
+				cell.setCellValue(sett.getCashFlowType());
+				cell = row.createCell(13);
 				cell.setCellValue(sett.getSettleAmount());
 				cell.setCellStyle(doubleCellStyle);
-				cell = row.createCell(13);
-				cell.setCellValue(sett.getLocation());
 				cell = row.createCell(14);
-				cell.setCellValue(sett.getLeaseNo());
+				cell.setCellValue(sett.getLocation());
 				cell = row.createCell(15);
-				cell.setCellValue(sett.getLeaseName());
+				cell.setCellValue(sett.getLeaseNo());
 				cell = row.createCell(16);
-				cell.setCellValue(sett.getProduct());
+				cell.setCellValue(sett.getLeaseName());
 				cell = row.createCell(17);
-				cell.setCellValue(sett.getPipeline());
+				cell.setCellValue(sett.getProduct());
 				cell = row.createCell(18);
+				cell.setCellValue(sett.getPipeline());
+				cell = row.createCell(19);
+				cell.setCellValue(sett.getQbIndex());
+				cell = row.createCell(20);
 				cell.setCellValue(sett.getAgreement());
+				cell = row.createCell(21);
+				cell.setCellValue(sett.getEventNo());
+				cell = row.createCell(22);
+				cell.setCellValue(sett.getEventTracking());
+				cell = row.createCell(23);
+				cell.setCellValue(sett.getOrigEvent());
+				
 			}
 		}
 		
@@ -325,8 +353,20 @@ public class SettlementXls {
 					map.put("product", i);
 				if (name.contains("pipeline") && name.contains("name"))
 					map.put("pipeline", i);		
+				if (name.contains("qb") && name.contains("index")) {
+					map.put("qb", i);
+				}
 				if (name.contains("netting") && name.contains("agreement")) {
 					map.put("agreement", i);
+				}
+				if (name.startsWith("event") && name.contains("#")) {
+					map.put("eventNo", i);
+				}
+				if (name.startsWith("event") && name.contains("tracking")) {
+					map.put("eventTracking", i);
+				}
+				if (name.startsWith("orig") && name.contains("event")) {
+					map.put("origEvent", i);
 				}
 			}
 		}
@@ -378,12 +418,17 @@ public class SettlementXls {
 		newSett.setDealTrackNo(sett.getDealTrackNo());
 		newSett.setVolume(sett.getVolume());
 		newSett.setUnit(sett.getUnit());
+		newSett.setPrice(sett.getPrice());
 		newSett.setCurrency(sett.getCurrency());
 		newSett.setLocation(sett.getLocation());
 		newSett.setLeaseNo(sett.getLeaseNo());
 		newSett.setLeaseName(sett.getLeaseName());
 		newSett.setProduct(sett.getProduct());
+		newSett.setQbIndex(sett.getQbIndex());
 		newSett.setPipeline(sett.getPipeline());
+		newSett.setEventNo(sett.getEventNo());
+		newSett.setEventTracking(sett.getEventTracking());
+		newSett.setOrigEvent(sett.getOrigEvent());
 		return newSett;
 	}
 
