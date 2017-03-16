@@ -156,12 +156,17 @@ public class SettlementXls {
 						settlement.getLeaseName().equalsIgnoreCase("NA") ||
 						settlement.getLeaseName().equalsIgnoreCase("N/A") ||
 						settlement.getLeaseName() == "") {
-					bulkSA.add(settlement);
+					String loc = settlement.getLocation().toLowerCase().trim();
+					if (loc.equals("st 63") || loc.equals("mc 809")) {
+						leaseSA.add(settlement);
+					}
+					else bulkSA.add(settlement);
 				} else {
 					leaseSA.add(settlement);
 				}
 			} else if (settlement.getBuySellFlag().equalsIgnoreCase("Sell")) {
-				if (settlement.getLocation().endsWith("Lease Sale")) {
+				String loc = settlement.getLocation().toLowerCase().trim();
+				if (loc.endsWith("lease sale") || loc.equals("n/a") || loc.equals("na")) {
 					leasePA.add(settlement);
 				} else {
 					bulkPA.add(settlement);
