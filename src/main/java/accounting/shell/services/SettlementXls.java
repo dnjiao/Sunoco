@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -44,6 +45,9 @@ public class SettlementXls {
 		List<Settlement> bulkPA = new ArrayList<Settlement>();
 		List<Settlement> leaseSA = new ArrayList<Settlement>();
 		List<Settlement> leasePA = new ArrayList<Settlement>();
+		
+		DataFormatter formatter = new DataFormatter();
+
 		for (int rowId = 1; rowId <= sheet.getLastRowNum(); rowId++)
     	{
 			row = sheet.getRow(rowId);
@@ -52,16 +56,16 @@ public class SettlementXls {
 			cell = row.getCell(colNameMap.get("period"));
 			if (cell != null) {
 				if (cell.getStringCellValue() == "") continue;
-				settlement.setPeriod(cell.getStringCellValue());
+				settlement.setPeriod(formatter.formatCellValue(cell));
 			} else 
 				break;
 			cell = row.getCell(colNameMap.get("flag"));
 			if (cell != null) {
-				settlement.setBuySellFlag(cell.getStringCellValue());
+				settlement.setBuySellFlag(formatter.formatCellValue(cell));
 			}
 			cell = row.getCell(colNameMap.get("status"));
 			if (cell != null) {
-				settlement.setStatus(cell.getStringCellValue());
+				settlement.setStatus(formatter.formatCellValue(cell));
 			}
 			cell = row.getCell(colNameMap.get("date"));
 			if (cell != null) {
@@ -74,7 +78,7 @@ public class SettlementXls {
 			}
 			cell = row.getCell(colNameMap.get("smart"));
 			if (cell != null) {
-				settlement.setSmartNo(cell.getStringCellValue());
+				settlement.setSmartNo(formatter.formatCellValue(cell));
 			}
 			cell = row.getCell(colNameMap.get("commit"));
 			if (cell != null) {
@@ -90,7 +94,7 @@ public class SettlementXls {
 			}
 			cell = row.getCell(colNameMap.get("unit"));
 			if (cell != null) {
-				settlement.setUnit(cell.getStringCellValue());
+				settlement.setUnit(formatter.formatCellValue(cell));
 			}
 			cell = row.getCell(colNameMap.get("price"));
 			if (cell != null) {
@@ -98,11 +102,11 @@ public class SettlementXls {
 			}
 			cell = row.getCell(colNameMap.get("currency"));
 			if (cell != null) {
-				settlement.setCurrency(cell.getStringCellValue());
+				settlement.setCurrency(formatter.formatCellValue(cell));
 			}
 			cell = row.getCell(colNameMap.get("type"));
 			if (cell != null) {
-				settlement.setCashFlowType(cell.getStringCellValue());
+				settlement.setCashFlowType(formatter.formatCellValue(cell));
 			}
 			cell = row.getCell(colNameMap.get("settleamount"));
 			if (cell != null) {
@@ -110,31 +114,31 @@ public class SettlementXls {
 			}
 			cell = row.getCell(colNameMap.get("location"));
 			if (cell != null) {
-				settlement.setLocation(cell.getStringCellValue());
+				settlement.setLocation(formatter.formatCellValue(cell));
 			}
 			cell = row.getCell(colNameMap.get("leaseno"));
 			if (cell != null) {
-				settlement.setLeaseNo(cell.getStringCellValue());
+				settlement.setLeaseNo(formatter.formatCellValue(cell));
 			}
 			cell = row.getCell(colNameMap.get("leasename"));
 			if (cell != null) {
-				settlement.setLeaseName(cell.getStringCellValue());
+				settlement.setLeaseName(formatter.formatCellValue(cell));
 			}			
 			cell = row.getCell(colNameMap.get("product"));
 			if (cell != null) {
-				settlement.setProduct(cell.getStringCellValue());
+				settlement.setProduct(formatter.formatCellValue(cell));
 			}
 			cell = row.getCell(colNameMap.get("pipeline"));
 			if (cell != null) {
-				settlement.setPipeline(cell.getStringCellValue());
+				settlement.setPipeline(formatter.formatCellValue(cell));
 			}
 			cell = row.getCell(colNameMap.get("qb"));
 			if (cell != null) {
-				settlement.setQbIndex(cell.getStringCellValue());
+				settlement.setQbIndex(formatter.formatCellValue(cell));
 			}
 			cell = row.getCell(colNameMap.get("agreement"));
 			if (cell != null) {
-				settlement.setAgreement(cell.getStringCellValue());
+				settlement.setAgreement(formatter.formatCellValue(cell));
 			}
 			cell = row.getCell(colNameMap.get("eventNo"));
 			if (cell != null) {
@@ -148,7 +152,7 @@ public class SettlementXls {
 			if (cell != null) {
 				settlement.setOrigEvent((int)cell.getNumericCellValue());
 			}	
-			
+			System.out.println(rowId);
 			// Determine category based on buy/sell flag and lease name
 			
 			if (settlement.getBuySellFlag().equalsIgnoreCase("Buy")) {

@@ -22,16 +22,17 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Oscar/Workspace/jar-libs/fontbox-2.0.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Oscar/Workspace/jar-libs/pdfbox-2.0.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Oscar/Workspace/jar-libs/pdfbox-tools-2.0.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Oscar/Workspace/jar-libs/preflight-2.0.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Oscar/Workspace/jar-libs/xmpbox-2.0.4.jar"/>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
 		<attributes>
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/fontbox-2.0.4.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/pdfbox-2.0.4.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/pdfbox-debugger-2.0.4.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/pdfbox-tools-2.0.4.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/preflight-2.0.4.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/xmpbox-2.0.4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
